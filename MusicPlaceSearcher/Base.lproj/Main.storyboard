@@ -1,24 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="MusicPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="znl-xA-dwu">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yiw-wn-4Jh">
+                                <rect key="frame" x="50" y="100" width="275" height="41"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7BU-Th-d1K">
+                                        <rect key="frame" x="10" y="5" width="197" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="197" id="ZUI-bh-QXg"/>
+                                            <constraint firstAttribute="height" constant="30" id="vyM-ME-8Lh"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDn-9S-4Ow">
+                                        <rect key="frame" x="217" y="5" width="48" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="M1h-pF-ezj"/>
+                                        </constraints>
+                                        <state key="normal" title="Search"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="eDn-9S-4Ow" secondAttribute="trailing" constant="10" id="Qvs-M4-xsp"/>
+                                    <constraint firstItem="eDn-9S-4Ow" firstAttribute="leading" secondItem="7BU-Th-d1K" secondAttribute="trailing" constant="10" id="dB5-tH-gAT"/>
+                                    <constraint firstItem="7BU-Th-d1K" firstAttribute="centerY" secondItem="yiw-wn-4Jh" secondAttribute="centerY" id="nzU-sk-QxQ"/>
+                                    <constraint firstItem="7BU-Th-d1K" firstAttribute="leading" secondItem="yiw-wn-4Jh" secondAttribute="leading" constant="10" id="r9U-cP-jUX"/>
+                                    <constraint firstAttribute="height" constant="41" id="snP-mI-6Ek"/>
+                                    <constraint firstItem="eDn-9S-4Ow" firstAttribute="centerY" secondItem="yiw-wn-4Jh" secondAttribute="centerY" id="yWq-mg-Wf8"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="yiw-wn-4Jh" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="0PY-kQ-MMV"/>
+                            <constraint firstItem="znl-xA-dwu" firstAttribute="top" secondItem="yiw-wn-4Jh" secondAttribute="top" constant="-80" id="8Ht-C6-Mc4"/>
+                            <constraint firstItem="znl-xA-dwu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Dq9-Ph-uq0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="znl-xA-dwu" secondAttribute="bottom" id="PEI-qI-oQA"/>
+                            <constraint firstItem="znl-xA-dwu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="e2n-At-dje"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="znl-xA-dwu" secondAttribute="trailing" id="kLy-jW-E0W"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
         </scene>
     </scenes>
 </document>
