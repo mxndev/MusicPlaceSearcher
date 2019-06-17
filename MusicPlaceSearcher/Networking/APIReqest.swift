@@ -7,7 +7,6 @@
 //
 
 typealias Parameters = [String: Any]
-typealias Headers = [String: String]
 
 enum Method: String {
     case get = "GET"
@@ -16,27 +15,24 @@ enum Method: String {
     case delete = "DELETE"
 }
 
-
 protocol APIRequestBase {
     var method: Method { get }
     var path: String { get }
-    var headers: Headers? { get }
     var parameters: Parameters? { get }
 }
 
 struct APIRequest: APIRequestBase {
     let method: Method
     let path: String
-    var headers: Headers?
     let parameters: Parameters?
 }
 
 extension APIRequest {
     
-    init(method: Method, endpoint: String, parameters: Parameters? = nil, requiredAuthentication: Bool)
+    init(method: Method, endpoint: String, parameters: Parameters? = nil)
     {
         let path = "test" //UPNConfig.baseURL().path + "/" + UPNConfig.baseAPIURL().path + "/" + endpoint
         
-        self.init(method: method, path: path, headers: nil, parameters: parameters)
+        self.init(method: method, path: path, parameters: parameters)
     }
 }

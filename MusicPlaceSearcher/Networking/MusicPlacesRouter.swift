@@ -18,7 +18,7 @@ extension MusicPlacesRouter {
         switch self {
             case .getMusicPlaces(let query, let limit, let offset):
 //                let params: Parameters = ["grant_type":"password", "username":username, "password":password]
-                return APIRequest(method: .post, endpoint: "oauth/token/", parameters: nil, requiredAuthentication: false)
+                return APIRequest(method: .post, endpoint: "oauth/token/", parameters: nil)
         }
     }
 }

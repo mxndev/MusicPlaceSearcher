@@ -15,6 +15,7 @@ enum NetworkResultCode: Int
     case Forbidden = 403
     case NotFound = 404
     case JSONDecodingError = 0
+    case APIError = -1
 }
 
 enum NetworkResult<T> {
