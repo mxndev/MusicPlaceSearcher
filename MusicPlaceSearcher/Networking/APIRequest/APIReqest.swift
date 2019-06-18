@@ -6,7 +6,7 @@
 //  Copyright © 2019 Mikołaj Płachta. All rights reserved.
 //
 
-typealias Parameters = [String: Any]
+typealias Parameters = [String: String]
 
 enum Method: String {
     case get = "GET"
@@ -31,7 +31,7 @@ extension APIRequest {
     
     init(method: Method, endpoint: String, parameters: Parameters? = nil)
     {
-        let path = "test" //UPNConfig.baseURL().path + "/" + UPNConfig.baseAPIURL().path + "/" + endpoint
+        let path = Constants.Networking.API.host + "/" + Constants.Networking.API.version + "/" + endpoint
         
         self.init(method: method, path: path, parameters: parameters)
     }

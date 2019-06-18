@@ -10,13 +10,20 @@ import Foundation
 
 class URLSessionService {
     
+    static let instance: URLSessionService = URLSessionService()
+    
     private let session = URLSession(configuration: .ephemeral, delegate: nil, delegateQueue: OperationQueue.main)
     
     func executeURLRequest(apiRequest: APIRequestBase, completionHandler: @escaping (NetworkResult<Data>) -> Void) {
         
-        var request = URLRequest(url: URL(string: apiRequest.path)!)
-        request.httpBody = try? JSONSerialization.data(withJSONObject: apiRequest.parameters ?? [:], options:JSONSerialization.WritingOptions.prettyPrinted)
-        
+        var request: URLRequest
+        if (apiRequest.method == .get) {
+            request = URLRequest(url: URL(string: apiRequest.path + buildQueryString(fromDictionary: apiRequest.parameters!))!)
+        } else {
+            request = URLRequest(url: URL(string: apiRequest.path)!)
+        }
+        request.httpMethod = apiRequest.method.rawValue
+
         let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             if let httpResponse = response as? HTTPURLResponse {
                 if let data = data, httpResponse.statusCode < 300
@@ -27,5 +34,17 @@ class URLSessionService {
             }
         })
         task.resume()
+    }
+    
+    func buildQueryString(fromDictionary parameters: [String:String]) -> String {
+        var urlVars:[String] = []
+        
+        for (k, value) in parameters {
+            if let encodedValue = value.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) {
+                urlVars.append(k + "=" + encodedValue)
+            }
+        }
+        
+        return urlVars.isEmpty ? "" : "?" + urlVars.joined(separator: "&")
     }
 }

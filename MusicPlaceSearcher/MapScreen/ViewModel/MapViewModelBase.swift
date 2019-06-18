@@ -11,6 +11,7 @@ import Foundation
 protocol MapViewModelBase {
     var delegate: MapViewDelegate? { get set }
     
+    func loadData()
 }
 
 protocol MapViewDelegate: class {
