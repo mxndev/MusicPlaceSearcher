@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 class MapViewModel: MapViewModelBase {
     
@@ -36,6 +37,7 @@ class MapViewModel: MapViewModelBase {
                     // all data downloaded
                     self.listOfPlaces = self.filterByCoords(places: self.listOfPlaces)
                     self.listOfPlaces = self.filterByDate(places: self.listOfPlaces)
+                    self.delegate?.showPinsOnMap(places: self.listOfPlaces.map({ MusicPlace(locationName: $0.name, coordinate: CLLocationCoordinate2D(latitude: Double(($0.coordinates?.latitude)!)!, longitude: Double(($0.coordinates?.longitude)!)!), lifetime: ($0.life?.lifetime)!)}))
                     let ss = self.listOfPlaces
                 }
             default:

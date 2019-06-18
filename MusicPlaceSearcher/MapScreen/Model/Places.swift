@@ -44,7 +44,7 @@ struct Coord: Codable {
 
 struct LifeSpan: Codable {
     let begin: Date?
-    let lifetime: Double?
+    let lifetime: Int?
     
     enum CodingKeys: String, CodingKey {
         case begin = "begin"
@@ -58,7 +58,7 @@ struct LifeSpan: Codable {
         if let beginStringDate = beginString {
             begin = dayTimePeriodFormatter.date(from: beginStringDate)
             dayTimePeriodFormatter.dateFormat = "rrrr"
-            lifetime = Double(dayTimePeriodFormatter.string(from: begin!))! - 1990
+            lifetime = Int(dayTimePeriodFormatter.string(from: begin!))! - 1990
         } else {
             begin = nil
             lifetime = nil

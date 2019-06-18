@@ -81,6 +81,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="loadingView" destination="T9Z-kG-oY2" id="R5c-Bo-aTZ"/>
+                        <outlet property="mapView" destination="znl-xA-dwu" id="dur-rb-e4u"/>
+                        <outlet property="searchButton" destination="eDn-9S-4Ow" id="RPG-3z-vsa"/>
+                        <outlet property="searchTextView" destination="7BU-Th-d1K" id="epN-vz-JBy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -15,4 +15,5 @@ protocol MapViewModelBase {
 }
 
 protocol MapViewDelegate: class {
+    func showPinsOnMap(places: [MusicPlace])
 }

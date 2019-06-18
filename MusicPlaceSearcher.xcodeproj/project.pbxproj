@@ -15,9 +15,10 @@
 		D03C53A122B84C3A0018D761 /* MusicPlacesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C539F22B84C3A0018D761 /* MusicPlacesService.swift */; };
 		D03C53A622B84E3D0018D761 /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C53A522B84E3D0018D761 /* Places.swift */; };
 		D03C53A822B84E720018D761 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C53A722B84E720018D761 /* Constants.swift */; };
+		D03C53AA22B9A92F0018D761 /* MusicPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C53A922B9A92E0018D761 /* MusicPlace.swift */; };
+		D03C53AD22B9A9430018D761 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03C53AB22B9A9430018D761 /* Main.storyboard */; };
 		D0850AD320DB089400C0D222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0850AD220DB089400C0D222 /* AppDelegate.swift */; };
 		D0850AD520DB089400C0D222 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0850AD420DB089400C0D222 /* MapViewController.swift */; };
-		D0850AD820DB089400C0D222 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0850AD620DB089400C0D222 /* Main.storyboard */; };
 		D0850ADA20DB089600C0D222 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0850AD920DB089600C0D222 /* Assets.xcassets */; };
 		D0850ADD20DB089600C0D222 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0850ADB20DB089600C0D222 /* LaunchScreen.storyboard */; };
 		D0850AF820DB17DB00C0D222 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0850AF620DB17DB00C0D222 /* MapViewModel.swift */; };
@@ -43,10 +44,11 @@
 		D03C539F22B84C3A0018D761 /* MusicPlacesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlacesService.swift; sourceTree = "<group>"; };
 		D03C53A522B84E3D0018D761 /* Places.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 		D03C53A722B84E720018D761 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D03C53A922B9A92E0018D761 /* MusicPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlace.swift; sourceTree = "<group>"; };
+		D03C53AC22B9A9430018D761 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D0850ACF20DB089400C0D222 /* MusicPlaceSearcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicPlaceSearcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0850AD220DB089400C0D222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0850AD420DB089400C0D222 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		D0850AD720DB089400C0D222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D0850AD920DB089600C0D222 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0850ADC20DB089600C0D222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0850ADE20DB089600C0D222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 		D03C53A422B84E2E0018D761 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D03C53A922B9A92E0018D761 /* MusicPlace.swift */,
 				D03C53A522B84E3D0018D761 /* Places.swift */,
 			);
 			path = Model;
@@ -135,7 +138,6 @@
 				D0850AD920DB089600C0D222 /* Assets.xcassets */,
 				D0850ADE20DB089600C0D222 /* Info.plist */,
 				D0850ADB20DB089600C0D222 /* LaunchScreen.storyboard */,
-				D0850AD620DB089400C0D222 /* Main.storyboard */,
 				D0850AF220DB14FD00C0D222 /* MapScreen */,
 				D03C538B22B701140018D761 /* Networking */,
 				D03C53A722B84E720018D761 /* Constants.swift */,
@@ -155,6 +157,7 @@
 		D0850AF220DB14FD00C0D222 /* MapScreen */ = {
 			isa = PBXGroup;
 			children = (
+				D03C53AB22B9A9430018D761 /* Main.storyboard */,
 				D03C53A422B84E2E0018D761 /* Model */,
 				D0850AF420DB151900C0D222 /* ViewController */,
 				D0850AF320DB151300C0D222 /* ViewModel */,
@@ -261,9 +264,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03C53AD22B9A9430018D761 /* Main.storyboard in Resources */,
 				D0850ADD20DB089600C0D222 /* LaunchScreen.storyboard in Resources */,
 				D0850ADA20DB089600C0D222 /* Assets.xcassets in Resources */,
-				D0850AD820DB089400C0D222 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +293,7 @@
 				D03C53A622B84E3D0018D761 /* Places.swift in Sources */,
 				D03C539D22B84C340018D761 /* APIReqest.swift in Sources */,
 				D0850AF820DB17DB00C0D222 /* MapViewModel.swift in Sources */,
+				D03C53AA22B9A92F0018D761 /* MusicPlace.swift in Sources */,
 				D03C53A022B84C3A0018D761 /* URLSessionService.swift in Sources */,
 				D03C53A122B84C3A0018D761 /* MusicPlacesService.swift in Sources */,
 			);
@@ -314,10 +318,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D0850AD620DB089400C0D222 /* Main.storyboard */ = {
+		D03C53AB22B9A9430018D761 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D0850AD720DB089400C0D222 /* Base */,
+				D03C53AC22B9A9430018D761 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
