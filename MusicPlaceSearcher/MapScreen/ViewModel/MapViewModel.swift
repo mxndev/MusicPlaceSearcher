@@ -33,7 +33,10 @@ class MapViewModel: MapViewModelBase {
                 if loopCounter*self.maximumOffset < places.count {
                     self.downloadPlaceData(query: query, itemsCounter: places.count, loopCounter: ( loopCounter + 1))
                 } else {
-                    self.filterByCoords(places: self.listOfPlaces)
+                    // all data downloaded
+                    self.listOfPlaces = self.filterByCoords(places: self.listOfPlaces)
+                    self.listOfPlaces = self.filterByDate(places: self.listOfPlaces)
+                    let ss = self.listOfPlaces
                 }
             default:
                 break
@@ -42,6 +45,12 @@ class MapViewModel: MapViewModelBase {
     }
     
     func filterByCoords(places: [Place]) -> [Place] {
-        return places
+        return places.filter({ $0.coordinates != nil })
+    }
+    
+    func filterByDate(places: [Place]) -> [Place] {
+        let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.dateFormat = "rrrr-MM-dd"
+        return places.filter({ $0.life != nil }).filter({ $0.life?.begin != nil }).filter({ ($0.life!.begin)! > dayTimePeriodFormatter.date(from: "1990-01-01")!})
     }
 }

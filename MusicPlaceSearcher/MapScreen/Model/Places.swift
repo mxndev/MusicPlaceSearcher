@@ -42,13 +42,26 @@ struct Coord: Codable {
     }
 }
 
-struct LifeSpan: Codable
-{
-    let begin: String?
-    let end: String?
+struct LifeSpan: Codable {
+    let begin: Date?
+    let lifetime: Double?
     
     enum CodingKeys: String, CodingKey {
         case begin = "begin"
-        case end = "end"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.dateFormat = "rrrr-MM-dd"
+        let beginString = try values.decodeIfPresent(String.self, forKey: .begin)
+        if let beginStringDate = beginString {
+            begin = dayTimePeriodFormatter.date(from: beginStringDate)
+            dayTimePeriodFormatter.dateFormat = "rrrr"
+            lifetime = Double(dayTimePeriodFormatter.string(from: begin!))! - 1990
+        } else {
+            begin = nil
+            lifetime = nil
+        }
     }
 }
