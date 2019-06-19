@@ -29,8 +29,11 @@ class URLSessionService {
                 if let data = data, httpResponse.statusCode < 300
                 {
                     completionHandler(.success(data))
+                } else {
+                    completionHandler(.failure(NetworkResultCode(rawValue: httpResponse.statusCode) ?? .APIError))
                 }
-                completionHandler(.failure(NetworkResultCode(rawValue: httpResponse.statusCode) ?? .APIError))
+            } else {
+                completionHandler(.failure(.NoInternetConnection))
             }
         })
         task.resume()

@@ -27,7 +27,6 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.loadData()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -35,10 +34,16 @@ class MapViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func pressed(sender: UIButton!) {
+        loadingView.isHidden = false
+        viewModel.loadData(query: "chi")
+    }
 }
 
 extension MapViewController: MapViewDelegate {
     func showPinsOnMap(places: [MusicPlace]) {
+        loadingView.isHidden = true
         places.forEach({
             let point = $0
             
@@ -55,6 +60,20 @@ extension MapViewController: MapViewDelegate {
                 
             }
         })
+    }
+    
+    func showNoResultError() {
+        loadingView.isHidden = true
+        let alertController = UIAlertController(title: "Sorry, no results!", message: "Try another one query.", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true)
+    }
+    
+    func showNoInternetConnectionError() {
+        loadingView.isHidden = true
+        let alertController = UIAlertController(title: "Sorry, no internet connection!", message: "Try again later", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true)
     }
     
     func centerMapOnLocation(location: CLLocation) {

@@ -40,6 +40,9 @@
                                             <constraint firstAttribute="width" constant="48" id="M1h-pF-ezj"/>
                                         </constraints>
                                         <state key="normal" title="Search"/>
+                                        <connections>
+                                            <action selector="pressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aRe-eH-TKH"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -84,7 +87,6 @@
                     <connections>
                         <outlet property="loadingView" destination="T9Z-kG-oY2" id="R5c-Bo-aTZ"/>
                         <outlet property="mapView" destination="znl-xA-dwu" id="dur-rb-e4u"/>
-                        <outlet property="searchButton" destination="eDn-9S-4Ow" id="RPG-3z-vsa"/>
                         <outlet property="searchTextView" destination="7BU-Th-d1K" id="epN-vz-JBy"/>
                     </connections>
                 </viewController>

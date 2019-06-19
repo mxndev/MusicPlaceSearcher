@@ -22,26 +22,31 @@ class MapViewModel: MapViewModelBase {
     
     weak var delegate: MapViewDelegate?
     
-    func loadData() {
-        downloadPlaceData(query: "chi", itemsCounter: 0, loopCounter: 0)
+    func loadData(query: String) {
+        downloadPlaceData(query: query, itemsCounter: 0, loopCounter: 0)
     }
     
     func downloadPlaceData(query: String, itemsCounter: Int, loopCounter: Int) {
         self.networkService.getMusicPlaces(query: query, limit: maximumOffset, offset: loopCounter*maximumOffset) { (result: NetworkResult<PlacesResult>) in
             switch result {
-            case .success(let places):
-                places.places.forEach({ self.listOfPlaces.append($0)})
-                if loopCounter*self.maximumOffset < places.count {
-                    self.downloadPlaceData(query: query, itemsCounter: places.count, loopCounter: ( loopCounter + 1))
-                } else {
-                    // all data downloaded
-                    self.listOfPlaces = self.filterByCoords(places: self.listOfPlaces)
-                    self.listOfPlaces = self.filterByDate(places: self.listOfPlaces)
-                    self.delegate?.showPinsOnMap(places: self.listOfPlaces.map({ MusicPlace(locationName: $0.name, coordinate: CLLocationCoordinate2D(latitude: Double(($0.coordinates?.latitude)!)!, longitude: Double(($0.coordinates?.longitude)!)!), lifetime: ($0.life?.lifetime)!)}))
-                    let ss = self.listOfPlaces
-                }
-            default:
-                break
+                case .success(let places):
+                    places.places.forEach({ self.listOfPlaces.append($0)})
+                    if loopCounter*self.maximumOffset < places.count {
+                        self.downloadPlaceData(query: query, itemsCounter: places.count, loopCounter: ( loopCounter + 1))
+                    } else {
+                        // all data downloaded
+                        self.listOfPlaces = self.filterByCoords(places: self.listOfPlaces)
+                        self.listOfPlaces = self.filterByDate(places: self.listOfPlaces)
+                        if self.listOfPlaces.count > 0 {
+                            self.delegate?.showPinsOnMap(places: self.listOfPlaces.map({ MusicPlace(locationName: $0.name, coordinate: CLLocationCoordinate2D(latitude: Double(($0.coordinates?.latitude)!)!, longitude: Double(($0.coordinates?.longitude)!)!), lifetime: ($0.life?.lifetime)!)}))
+                        } else {
+                            self.delegate?.showNoResultError()
+                        }
+                    }
+                case .failure(let error):
+                    if error == .NoInternetConnection {
+                        self.delegate?.showNoInternetConnectionError()
+                    }
             }
         }
     }

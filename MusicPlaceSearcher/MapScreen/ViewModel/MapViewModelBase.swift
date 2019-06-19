@@ -11,9 +11,13 @@ import Foundation
 protocol MapViewModelBase {
     var delegate: MapViewDelegate? { get set }
     
-    func loadData()
+    func loadData(query: String)
+    func filterByCoords(places: [Place]) -> [Place]
+    func filterByDate(places: [Place]) -> [Place]
 }
 
 protocol MapViewDelegate: class {
     func showPinsOnMap(places: [MusicPlace])
+    func showNoResultError()
+    func showNoInternetConnectionError()
 }
