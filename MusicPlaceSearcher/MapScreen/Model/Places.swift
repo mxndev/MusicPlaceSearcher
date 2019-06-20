@@ -22,7 +22,7 @@ struct PlacesResult: Codable {
 
 struct Place: Codable {
     let name: String
-    let coordinates: Coord?
+    let coordinates: Coordinates?
     let life: LifeSpan?
     
     enum CodingKeys: String, CodingKey {
@@ -32,7 +32,7 @@ struct Place: Codable {
     }
 }
 
-struct Coord: Codable {
+struct Coordinates: Codable {
     let latitude: String?
     let longitude: String?
     
@@ -44,7 +44,7 @@ struct Coord: Codable {
 
 struct LifeSpan: Codable {
     let begin: Date?
-    let lifetime: Int?
+    let lifetime: Int
     
     enum CodingKeys: String, CodingKey {
         case begin = "begin"
@@ -56,12 +56,28 @@ struct LifeSpan: Codable {
         dayTimePeriodFormatter.dateFormat = "rrrr-MM-dd"
         let beginString = try values.decodeIfPresent(String.self, forKey: .begin)
         if let beginStringDate = beginString {
-            begin = dayTimePeriodFormatter.date(from: beginStringDate)
-            dayTimePeriodFormatter.dateFormat = "rrrr"
-            lifetime = Int(dayTimePeriodFormatter.string(from: begin!))! - 1990
+            if let parsedDate = dayTimePeriodFormatter.date(from: beginStringDate) {
+                begin = parsedDate
+                dayTimePeriodFormatter.dateFormat = "rrrr"
+                lifetime = Int(dayTimePeriodFormatter.string(from: parsedDate))! - 1990
+            } else {
+                dayTimePeriodFormatter.dateFormat = "rrrr"
+                if let parsedOnlyYear = dayTimePeriodFormatter.date(from: beginStringDate) {
+                    begin = parsedOnlyYear
+                    lifetime = Int(dayTimePeriodFormatter.string(from: parsedOnlyYear))! - 1990
+                } else {
+                    begin = nil
+                    lifetime = 0
+                }
+            }
         } else {
             begin = nil
-            lifetime = nil
+            lifetime = 0
         }
+    }
+    
+    init(begin: Date, lifetime: Int) {
+        self.begin = begin
+        self.lifetime = lifetime
     }
 }

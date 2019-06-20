@@ -11,7 +11,7 @@ import MapKit
 
 class MapViewModel: MapViewModelBase {
     
-    private let maximumOffset = 2 // maximum results per page
+    private let maximumOffset = 10 // maximum results per page
     
     // singleton without dependency injection
     static let instance: MapViewModelBase = MapViewModel()
@@ -58,6 +58,6 @@ class MapViewModel: MapViewModelBase {
     func filterByDate(places: [Place]) -> [Place] {
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "rrrr-MM-dd"
-        return places.filter({ $0.life != nil }).filter({ $0.life?.begin != nil }).filter({ ($0.life!.begin)! > dayTimePeriodFormatter.date(from: "1990-01-01")!})
+        return places.filter({ $0.life != nil }).filter({ $0.life?.begin != nil }).filter({ ($0.life?.lifetime)! > 0 })
     }
 }
