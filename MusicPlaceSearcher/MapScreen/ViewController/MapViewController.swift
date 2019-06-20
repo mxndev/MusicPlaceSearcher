@@ -12,7 +12,6 @@ import MapKit
 class MapViewController: UIViewController {
 
     @IBOutlet weak var searchTextView: UITextField!
-    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var loadingView: UIView!
@@ -27,7 +26,8 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.searchTextView.delegate = self
+        self.searchTextView.returnKeyType = .done
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,14 +36,18 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func pressed(sender: UIButton!) {
-        loadingView.isHidden = false
-        viewModel.loadData(query: "chi")
+        executeLoadingPlacesData()
     }
 }
 
 extension MapViewController: MapViewDelegate {
     func showPinsOnMap(places: [MusicPlace]) {
         loadingView.isHidden = true
+        
+        for point in mapView.annotations {
+            mapView.removeAnnotation(point)
+        }
+        
         places.forEach({
             let point = $0
             
@@ -76,9 +80,33 @@ extension MapViewController: MapViewDelegate {
         self.present(alertController, animated: true)
     }
     
+    func showNoTextError() {
+        loadingView.isHidden = true
+        let alertController = UIAlertController(title: "Sorry, no entered text!", message: "First you must enter search query text.", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true)
+    }
+    
     func centerMapOnLocation(location: CLLocation) {
         let radius: Double = pow(10, 7)
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, radius, radius)
         mapView.setRegion(coordinateRegion, animated: true)
+    }
+}
+
+extension MapViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTextView.resignFirstResponder()
+        executeLoadingPlacesData()
+        return true
+    }
+    
+    func executeLoadingPlacesData() {
+        if let text = searchTextView.text, text != "" {
+            loadingView.isHidden = false
+            viewModel.loadData(query: text)
+        } else {
+            self.showNoTextError()
+        }
     }
 }
