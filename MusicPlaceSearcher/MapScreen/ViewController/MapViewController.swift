@@ -67,35 +67,35 @@ extension MapViewController: MapViewDelegate {
     
     func showNoResultError() {
         loadingView.isHidden = true
-        let alertController = UIAlertController(title: "Sorry, no results!", message: "Try another one query.", preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = UIAlertController(title: "Sorry, no results!", message: "Try another one query.", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertController, animated: true)
     }
     
     func showNoInternetConnectionError() {
         loadingView.isHidden = true
-        let alertController = UIAlertController(title: "Sorry, no internet connection!", message: "Try again later", preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = UIAlertController(title: "Sorry, no internet connection!", message: "Try again later", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertController, animated: true)
     }
     
     func showNoTextError() {
         loadingView.isHidden = true
-        let alertController = UIAlertController(title: "Sorry, no entered text!", message: "First you must enter search query text.", preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = UIAlertController(title: "Sorry, no entered text!", message: "First you must enter search query text.", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertController, animated: true)
     }
     
     func showDownloadingError() {
         loadingView.isHidden = true
-        let alertController = UIAlertController(title: "Sorry, error occured. Try again later!", message: "Try again later", preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = UIAlertController(title: "Sorry, error occured. Try again later!", message: "Try again later", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertController, animated: true)
     }
     
     func centerMapOnLocation(location: CLLocation) {
         let radius: Double = pow(10, 7)
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, radius, radius)
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: radius, longitudinalMeters: radius)
         mapView.setRegion(coordinateRegion, animated: true)
     }
 }
