@@ -12,8 +12,8 @@ protocol MapViewModelBase {
     var delegate: MapViewDelegate? { get set }
     
     func loadData(query: String)
-    func filterByCoords(places: [Place]) -> [Place]
-    func filterByDate(places: [Place]) -> [Place]
+    func filterByCoords()
+    func filterByDate()
 }
 
 protocol MapViewDelegate: class {

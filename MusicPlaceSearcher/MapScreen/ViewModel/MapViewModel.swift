@@ -14,11 +14,16 @@ class MapViewModel: MapViewModelBase {
     private let maximumOffset = 10 // maximum results per page
     
     // singleton without dependency injection
-    static let instance: MapViewModelBase = MapViewModel()
+    static let instance: MapViewModelBase = MapViewModel(places: [])
+    
+    // main constructor
+    init(places: [Place]) {
+        listOfPlaces = places
+    }
     
     private let networkService: MusicPlacesServicesProtocol = MusicPlacesServices.instance
     
-    var listOfPlaces: [Place] = []
+    var listOfPlaces: [Place]
     
     weak var delegate: MapViewDelegate?
     
@@ -34,11 +39,16 @@ class MapViewModel: MapViewModelBase {
                     if loopCounter*self.maximumOffset < places.count {
                         self.downloadPlaceData(query: query, itemsCounter: places.count, loopCounter: ( loopCounter + 1))
                     } else {
-                        // all data downloaded
-                        self.listOfPlaces = self.filterByCoords(places: self.listOfPlaces)
-                        self.listOfPlaces = self.filterByDate(places: self.listOfPlaces)
+                        // all data downloaded, filter data
+                        self.filterByCoords()
+                        self.filterByDate()
+                        
+                        // generate pins on map
                         if self.listOfPlaces.count > 0 {
-                            self.delegate?.showPinsOnMap(places: self.listOfPlaces.map({ MusicPlace(locationName: $0.name, coordinate: CLLocationCoordinate2D(latitude: Double(($0.coordinates?.latitude)!)!, longitude: Double(($0.coordinates?.longitude)!)!), lifetime: ($0.life?.lifetime)!)}))
+                            self.delegate?.showPinsOnMap(places: self.listOfPlaces.map({
+                                guard let lifetime = $0.life?.lifetime, let coordinates = $0.coordinates, let latitudeString = coordinates.latitude, let longitudeString = coordinates.longitude, let latitude = Double(latitudeString), let longitude = Double(longitudeString) else { return MusicPlace(locationName: "", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), lifetime: -1) }
+                                return MusicPlace(locationName: $0.name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), lifetime: lifetime)
+                            }))
                         } else {
                             self.delegate?.showNoResultError()
                         }
@@ -51,13 +61,15 @@ class MapViewModel: MapViewModelBase {
         }
     }
     
-    func filterByCoords(places: [Place]) -> [Place] {
-        return places.filter({ $0.coordinates != nil })
+    func filterByCoords() {
+        listOfPlaces = listOfPlaces.filter({ $0.coordinates != nil })
     }
     
-    func filterByDate(places: [Place]) -> [Place] {
+    func filterByDate() {
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "rrrr-MM-dd"
-        return places.filter({ $0.life != nil }).filter({ $0.life?.begin != nil }).filter({ ($0.life?.lifetime)! > 0 })
+        listOfPlaces = listOfPlaces.filter({ $0.life != nil }).filter({ $0.life?.begin != nil }).filter({
+            guard let lifetime = $0.life?.lifetime else { return false }
+            return lifetime > 0 })
     }
 }

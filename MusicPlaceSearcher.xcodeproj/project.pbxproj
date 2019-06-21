@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D03C538922B6E8770018D761 /* MusicPlaceSearcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C538822B6E8770018D761 /* MusicPlaceSearcherTests.swift */; };
+		1918BCDE22BC52FA00F24092 /* MapViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1918BCDD22BC52FA00F24092 /* MapViewModelTests.swift */; };
 		D03C539B22B84C340018D761 /* MusicPlacesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C539822B84C340018D761 /* MusicPlacesRouter.swift */; };
 		D03C539C22B84C340018D761 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C539922B84C340018D761 /* NetworkResult.swift */; };
 		D03C539D22B84C340018D761 /* APIReqest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C539A22B84C340018D761 /* APIReqest.swift */; };
@@ -36,7 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D03C538822B6E8770018D761 /* MusicPlaceSearcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlaceSearcherTests.swift; sourceTree = "<group>"; };
+		1918BCDD22BC52FA00F24092 /* MapViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewModelTests.swift; sourceTree = "<group>"; };
 		D03C539822B84C340018D761 /* MusicPlacesRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlacesRouter.swift; sourceTree = "<group>"; };
 		D03C539922B84C340018D761 /* NetworkResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		D03C539A22B84C340018D761 /* APIReqest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIReqest.swift; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 		D0850AE620DB089600C0D222 /* MusicPlaceSearcherTests */ = {
 			isa = PBXGroup;
 			children = (
-				D03C538822B6E8770018D761 /* MusicPlaceSearcherTests.swift */,
+				1918BCDD22BC52FA00F24092 /* MapViewModelTests.swift */,
 				D0850AE920DB089600C0D222 /* Info.plist */,
 			);
 			path = MusicPlaceSearcherTests;
@@ -303,7 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03C538922B6E8770018D761 /* MusicPlaceSearcherTests.swift in Sources */,
+				1918BCDE22BC52FA00F24092 /* MapViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,7 +506,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicPlaces.app/MusicPlaces";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicPlaceSearcher.app/MusicPlaceSearcher";
 			};
 			name = Debug;
 		};
@@ -528,7 +528,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicPlaces.app/MusicPlaces";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicPlaceSearcher.app/MusicPlaceSearcher";
 			};
 			name = Release;
 		};

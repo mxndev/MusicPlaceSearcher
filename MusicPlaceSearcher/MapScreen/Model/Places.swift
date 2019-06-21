@@ -52,32 +52,42 @@ struct LifeSpan: Codable {
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "rrrr-MM-dd"
         let beginString = try values.decodeIfPresent(String.self, forKey: .begin)
-        if let beginStringDate = beginString {
-            if let parsedDate = dayTimePeriodFormatter.date(from: beginStringDate) {
-                begin = parsedDate
-                dayTimePeriodFormatter.dateFormat = "rrrr"
-                lifetime = Int(dayTimePeriodFormatter.string(from: parsedDate))! - 1990
-            } else {
-                dayTimePeriodFormatter.dateFormat = "rrrr"
-                if let parsedOnlyYear = dayTimePeriodFormatter.date(from: beginStringDate) {
-                    begin = parsedOnlyYear
-                    lifetime = Int(dayTimePeriodFormatter.string(from: parsedOnlyYear))! - 1990
-                } else {
-                    begin = nil
-                    lifetime = 0
-                }
-            }
+        if let beginStringDate = beginString, let dateWithLifetime = LifeSpan.calculateLifetime(beginString: beginStringDate) {
+            begin = dateWithLifetime.0
+            lifetime = dateWithLifetime.1
         } else {
             begin = nil
             lifetime = 0
         }
     }
     
-    init(begin: Date, lifetime: Int) {
-        self.begin = begin
-        self.lifetime = lifetime
+    init(beginDateString: String) {
+        if let dateWithLifetime = LifeSpan.calculateLifetime(beginString: beginDateString) {
+            begin = dateWithLifetime.0
+            lifetime = dateWithLifetime.1
+        } else {
+            begin = nil
+            lifetime = 0
+        }
+    }
+    
+    static func calculateLifetime(beginString: String) -> (Date, Int)? { // (begin, lifetime)
+        let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.dateFormat = "rrrr-MM-dd"
+        if let parsedDate = dayTimePeriodFormatter.date(from: beginString) {
+            dayTimePeriodFormatter.dateFormat = "rrrr"
+            if let beginYear = Int(dayTimePeriodFormatter.string(from: parsedDate)) {
+                return (parsedDate, beginYear - 1990)
+            }
+        } else {
+            dayTimePeriodFormatter.dateFormat = "rrrr"
+            if let parsedOnlyYear = dayTimePeriodFormatter.date(from: beginString) {
+                if let beginYear = Int(dayTimePeriodFormatter.string(from: parsedOnlyYear)) {
+                    return (parsedOnlyYear, beginYear - 1990)
+                }
+            }
+        }
+        return nil
     }
 }

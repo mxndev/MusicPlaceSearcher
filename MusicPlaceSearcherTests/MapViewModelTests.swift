@@ -28,7 +28,11 @@ class MapViewModelTests: XCTestCase {
         places.append(Place(name: "test3", coordinates: Coordinates(latitude: "36", longitude: "76"), life: nil))
         places.append(Place(name: "test4", coordinates: nil, life: nil))
         
-        let filteredPlaces = MapViewModel(places: places).filterByCoords(places: places)
+        // initi view model and filter places
+        let instance = MapViewModel(places: places)
+        instance.filterByCoords()
+        
+        let filteredPlaces = instance.listOfPlaces
         
         XCTAssertEqual(filteredPlaces.count, 2, "List of filtered places seems to be wrong")
     }
@@ -40,7 +44,11 @@ class MapViewModelTests: XCTestCase {
         places.append(Place(name: "test2", coordinates: Coordinates(latitude: "12", longitude: "24"), life: nil))
         places.append(Place(name: "test3", coordinates: Coordinates(latitude: "36", longitude: "76"), life: nil))
         
-        let filteredPlaces = MapViewModel(places: places).filterByCoords(places: places)
+        // initi view model and filter places
+        let instance = MapViewModel(places: places)
+        instance.filterByCoords()
+        
+        let filteredPlaces = instance.listOfPlaces
         
         XCTAssertEqual(filteredPlaces.count, 3, "List of filtered places seems to be wrong")
     }
@@ -56,9 +64,13 @@ class MapViewModelTests: XCTestCase {
         places.append(Place(name: "test3", coordinates: nil, life: LifeSpan(beginDateString: "1990-01-02")))
         places.append(Place(name: "test4", coordinates: nil, life: LifeSpan(beginDateString: "1991-01-02")))
         
-        let filteredPlaces = MapViewModel(places: places).filterByDate(places: places)
+        // initi view model and filter places
+        let instance = MapViewModel(places: places)
+        instance.filterByDate()
         
-        XCTAssertEqual(filteredPlaces.count, 2, "List of filtered dates seems to be wrong")
+        let filteredPlaces = instance.listOfPlaces
+        
+        XCTAssertEqual(filteredPlaces.count, 1, "List of filtered dates seems to be wrong")
     }
     
     func test2FilterDate() {
@@ -69,10 +81,14 @@ class MapViewModelTests: XCTestCase {
         var places: [Place] = []
         places.append(Place(name: "test1", coordinates: nil, life: nil))
         places.append(Place(name: "test2", coordinates: nil, life: LifeSpan(beginDateString: "1989-01-02")))
-        places.append(Place(name: "test3", coordinates: nil, life: LifeSpan(beginDateString: "1990-01-02")))
+        places.append(Place(name: "test3", coordinates: nil, life: LifeSpan(beginDateString: "1991-01-02")))
         places.append(Place(name: "test4", coordinates: nil, life: nil))
         
-        let filteredPlaces = MapViewModel(places: places).filterByDate(places: places)
+        // initi view model and filter places
+        let instance = MapViewModel(places: places)
+        instance.filterByDate()
+        
+        let filteredPlaces = instance.listOfPlaces
         
         XCTAssertEqual(filteredPlaces.count, 1, "List of filtered dates seems to be wrong")
     }
