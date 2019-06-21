@@ -20,4 +20,5 @@ protocol MapViewDelegate: class {
     func showPinsOnMap(places: [MusicPlace])
     func showNoResultError()
     func showNoInternetConnectionError()
+    func showDownloadingError()
 }

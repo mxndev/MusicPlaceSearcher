@@ -136,11 +136,11 @@
 			children = (
 				D0850AD220DB089400C0D222 /* AppDelegate.swift */,
 				D0850AD920DB089600C0D222 /* Assets.xcassets */,
+				D03C53A722B84E720018D761 /* Constants.swift */,
 				D0850ADE20DB089600C0D222 /* Info.plist */,
 				D0850ADB20DB089600C0D222 /* LaunchScreen.storyboard */,
 				D0850AF220DB14FD00C0D222 /* MapScreen */,
 				D03C538B22B701140018D761 /* Networking */,
-				D03C53A722B84E720018D761 /* Constants.swift */,
 			);
 			path = MusicPlaceSearcher;
 			sourceTree = "<group>";

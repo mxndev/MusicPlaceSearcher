@@ -93,6 +93,46 @@ class MapViewModelTests: XCTestCase {
         XCTAssertEqual(filteredPlaces.count, 1, "List of filtered dates seems to be wrong")
     }
     
+    func test3FilterDate() {
+        // prepare data
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "rrrr-MM-dd"
+        
+        var places: [Place] = []
+        places.append(Place(name: "test1", coordinates: nil, life: LifeSpan(beginDateString: "1988")))
+        places.append(Place(name: "test2", coordinates: nil, life: LifeSpan(beginDateString: "1989-01-02")))
+        places.append(Place(name: "test3", coordinates: nil, life: LifeSpan(beginDateString: "1991")))
+        places.append(Place(name: "test4", coordinates: nil, life: LifeSpan(beginDateString: "1992-01-02")))
+        
+        // initi view model and filter places
+        let instance = MapViewModel(places: places)
+        instance.filterByDate()
+        
+        let filteredPlaces = instance.listOfPlaces
+        
+        XCTAssertEqual(filteredPlaces.count, 2, "List of filtered dates seems to be wrong")
+    }
+    
+    func test4FilterDate() {
+        // prepare data
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "rrrr-MM-dd"
+        
+        var places: [Place] = []
+        places.append(Place(name: "test1", coordinates: nil, life: LifeSpan(beginDateString: "1990-01-02")))
+        places.append(Place(name: "test2", coordinates: nil, life: LifeSpan(beginDateString: "1991")))
+        places.append(Place(name: "test3", coordinates: nil, life: LifeSpan(beginDateString: "1993-01-02")))
+        places.append(Place(name: "test4", coordinates: nil, life: nil))
+        
+        // initi view model and filter places
+        let instance = MapViewModel(places: places)
+        instance.filterByDate()
+        
+        let filteredPlaces = instance.listOfPlaces
+        
+        XCTAssertEqual(filteredPlaces.count, 2, "List of filtered dates seems to be wrong")
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

@@ -13,7 +13,6 @@ enum MusicPlacesRouter {
 }
 
 extension MusicPlacesRouter {
-    
     var request: APIRequest {
         switch self {
             case .getMusicPlaces(let query, let limit, let offset):

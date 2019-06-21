@@ -11,7 +11,7 @@ import MapKit
 
 class MapViewModel: MapViewModelBase {
     
-    private let maximumOffset = 10 // maximum results per page
+    private let maximumOffset = 100 // maximum results per page
     
     // singleton without dependency injection
     static let instance: MapViewModelBase = MapViewModel(places: [])
@@ -28,6 +28,7 @@ class MapViewModel: MapViewModelBase {
     weak var delegate: MapViewDelegate?
     
     func loadData(query: String) {
+        self.listOfPlaces.removeAll()
         downloadPlaceData(query: query, itemsCounter: 0, loopCounter: 0)
     }
     
@@ -56,6 +57,8 @@ class MapViewModel: MapViewModelBase {
                 case .failure(let error):
                     if error == .NoInternetConnection {
                         self.delegate?.showNoInternetConnectionError()
+                    } else {
+                        self.delegate?.showDownloadingError()
                     }
             }
         }

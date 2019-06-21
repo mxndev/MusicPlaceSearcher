@@ -28,9 +28,7 @@ struct APIRequest: APIRequestBase {
 }
 
 extension APIRequest {
-    
-    init(method: Method, endpoint: String, parameters: Parameters? = nil)
-    {
+    init(method: Method, endpoint: String, parameters: Parameters? = nil) {
         let path = Constants.Networking.API.host + "/" + Constants.Networking.API.version + "/" + endpoint
         
         self.init(method: method, path: path, parameters: parameters)

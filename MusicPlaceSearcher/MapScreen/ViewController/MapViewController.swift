@@ -61,7 +61,6 @@ extension MapViewController: MapViewDelegate {
             // remove point after lifetime
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(point.lifetime)) {
                     self.mapView.removeAnnotation(point)
-                
             }
         })
     }
@@ -83,6 +82,13 @@ extension MapViewController: MapViewDelegate {
     func showNoTextError() {
         loadingView.isHidden = true
         let alertController = UIAlertController(title: "Sorry, no entered text!", message: "First you must enter search query text.", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true)
+    }
+    
+    func showDownloadingError() {
+        loadingView.isHidden = true
+        let alertController = UIAlertController(title: "Sorry, error occured. Try again later!", message: "Try again later", preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertController, animated: true)
     }
